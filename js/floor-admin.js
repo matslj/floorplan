@@ -91,6 +91,10 @@ floor.admin = (function () {
                     graph.processElementsInRange("g2610", "g2618", _displayHoverBox);
                     break;
                 case 1:
+                    
+                    graph.processElementsInRange("g3048", "g3084", _displayHoverBox);
+                    graph.processElementsInRange("g3116", "g3120", _displayHoverBox);
+                    graph.processElementsInRange("g2916", "g2984", _displayHoverBox);
                     break;
                 default:
             }
