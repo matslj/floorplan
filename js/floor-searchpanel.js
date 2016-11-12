@@ -94,8 +94,8 @@ floor.searchPanel = (function() {
                 buttonFunction(function(node) {
                     if (app.getCurrentFloorNumber() === node.floor) {
                         app.setMultiSelect(node);
-                        data.push(node);
                     }
+                    data.push(node);
                 });
                 _displayResult(data);
             } else if (evt.which === 13 || evt.keyCode === 13 || evel.id && evel.id === SEARCH_BUTTON) {
@@ -121,7 +121,9 @@ floor.searchPanel = (function() {
                 evel = evel.parentNode;
             }
             floorNumber = parseInt(evel.getAttribute("data-floornr"),10);
-            
+            if (app.getCurrentFloorNumber() !== floorNumber) {
+                app.changeFloor(floorNumber);
+            }            
             roomId = evel.getAttribute("data-roomid");
             svgTarget = graph.getSvgElementById(roomId);
                     

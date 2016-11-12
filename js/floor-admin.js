@@ -96,7 +96,7 @@ floor.admin = (function () {
             }
         },
         
-        floorChooserAction: function(floorAdjustment) {
+        floorChooserBtnAction: function(floorAdjustment) {
             var floorNumber = currentFloorNumber + parseInt(floorAdjustment, 10);
             if (floorNumber >= 1 && floorNumber <= 3) {
                 floor.admin.changeFloor(floorNumber);

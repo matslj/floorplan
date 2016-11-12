@@ -33,6 +33,7 @@ floor.app = (function() {
     tmplPresentation = null,
     tmplHover = null,
     self = null,
+    moduleCode = "app",
 
     // Private methods
    /**
@@ -50,9 +51,9 @@ floor.app = (function() {
                 tempEl = graph.initSelectableElement(loader.data.rooms[i].id);
 
                 // Add listeners
-                utils.addListener(tempEl, 'click', selectRoom);
-                utils.addListener(tempEl, 'mouseover', hoverRoom);
-                utils.addListener(tempEl, 'mouseout', clearHover);
+                utils.addListener(tempEl, 'click', selectRoom, moduleCode);
+                utils.addListener(tempEl, 'mouseover', hoverRoom, moduleCode);
+                utils.addListener(tempEl, 'mouseout', clearHover, moduleCode);
             }
         }
        // Instead of the event handling above, one can use a central eventhandler
@@ -194,12 +195,7 @@ floor.app = (function() {
             floorNumberElement = document.getElementById("floorNumber");
             allFloors = document.querySelectorAll(".floorplan");
             allFloors[0].style.display = 'block';
-
-            // Retrieve bounding rects for the appropriate elements in the dom structure.
-            // We only need the displaced elements.
-            bodyBR = document.body.getBoundingClientRect(); // Needed to compensate for hover displacement
-            col1BR = document.getElementById("col1").getBoundingClientRect(); // Needed to compensate for hover displacement
-
+            
             // Init templates
 //            tmplPresentation = document.getElementById("tmpl-presentation").innerHTML;
 //            tmplHover = document.getElementById("tmpl-hover").innerHTML;
@@ -209,14 +205,24 @@ floor.app = (function() {
             Mustache.parse(tmplHover);
 
             // Init dependencies
-            graph.init(currentFloorNumber);
             dataHandler.init();
             searchPanel.init();
 
-            // Binding event handlers
-            bindEventHandlers(currentFloorNumber);
+            this.reload();
             
             console.log("- initializing complete -");
+        },
+        
+        reload: function() {
+            floor.utils.removeAllActiveListeners(moduleCode);
+            // Retrieve bounding rects for the appropriate elements in the dom structure.
+            // We only need the displaced elements.
+            bodyBR = document.body.getBoundingClientRect(); // Needed to compensate for hover displacement
+            col1BR = document.getElementById("col1").getBoundingClientRect(); // Needed to compensate for hover displacement
+            
+            graph.init(currentFloorNumber);
+            // Binding event handlers
+            bindEventHandlers(currentFloorNumber);
         },
 
         selectRoomAction: function(el) {
@@ -252,7 +258,7 @@ floor.app = (function() {
             return currentFloorNumber;
         },
         
-        floorChooserAction: function(floorAdjustment) {
+        floorChooserBtnAction: function(floorAdjustment) {
             var floorNumber = currentFloorNumber + parseInt(floorAdjustment, 10);
             if (floorNumber >= 1 && floorNumber <= 3) {
                 floor.app.changeFloor(floorNumber);
@@ -260,8 +266,8 @@ floor.app = (function() {
         },
         
         changeFloor: function(floorNumber) {
+            floor.app.clearMultiSelect()
             currentFloorNumber = floorNumber;
-            floor.utils.removeAllActiveListeners();
             for(i = allFloors.length; i--;) {
                 allFloors[i].style.display = 'none';
             }
@@ -269,6 +275,7 @@ floor.app = (function() {
             currentLevel.style.display = "block";
             floorNumberElement.innerHTML = currentFloorNumber;
             _manageArrows(currentFloorNumber);
+            floor.app.reload();
         }
     };
 }());

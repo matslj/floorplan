@@ -22,23 +22,49 @@ the svg.
 
 ## Installation
 
+Without svg-files, the data.json-file and images, there's no working example.
+
+If they were there, there would be no need for installation other than dropping
+the project folder into your webserver (however - everything unminified and unconcatenated).
+
+As a reminder to myself in future work:
+
+Add the following styling to the svg-files.
+
 ```
---
--- Add default user(s)
---
-INSERT INTO {$tUser} (accountUser, emailUser, nameUser, lastLoginUser, passwordUser, activeUser)
-VALUES ('doe', 'doe@noreply.se', 'Jane Doe', NOW(), md5('doe'), TRUE);
+<style type="text/css">
+
+    .fill-none {
+        fill: none;
+    }
     
---
--- Add default groups
---
-INSERT INTO {$tGroup} (idGroup, nameGroup) VALUES ('usr', 'Regular users of the site');
-
---
--- Add default groupmembers
---
-INSERT INTO {$tGroupMember} (GroupMember_idUser, GroupMember_idGroup)
-	VALUES ((SELECT idUser FROM {$tUser} WHERE accountUser = 'doe'), 'usr');
-
+    .fill-selected {
+        fill: green;
+    }
+    
+    .fill-hover {
+        fill: yellow;
+    }
+               
+    /* Zoom and Pan */
+    .compass{
+        fill:  #fff;
+        stroke:  #000;
+        stroke-width:  1.5;
+    }
+    .button{
+        fill:  #225EA8;
+        stroke:  #0C2C84;
+        stroke-miterlimit:	6;
+        stroke-linecap:  round;
+    }
+    .button:hover{
+        stroke-width:  2;
+    }
+    .plus-minus{
+        fill:  #fff;
+        pointer-events: none;
+    }           
+  </style>
 ```
 

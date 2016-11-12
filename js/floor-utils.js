@@ -37,24 +37,49 @@ floor.utils = (function() {
     }
     
     return {
-        addListener: function(el, type, fn) {
+        /**
+         * Adds an event listener for designated element event.
+         * 
+         * @param {element} el the element on which a listener is added
+         * @param {string} type the type of event to listen for
+         * @param {function} fn the eventhandler to use
+         * @param {string} es the eventgroup (if any) that this listener belongs to
+         * @returns {@var;fn}
+         */
+        addListener: function(el, type, fn, es) {
             activeListeners.push({
                el: el,
                type: type,
-               fn: fn
+               fn: fn,
+               es: es
             });
             return addListener(el, type, fn);
         },
         removeListener: removeListener,
         
-        removeAllActiveListeners: function() {
+        /**
+         * Removes all active listeners. With the paramter es set
+         * only the events within the eventgroup given by es will
+         * be removed.
+         * 
+         * @param {type} es
+         * @returns {undefined}
+         */
+        removeAllActiveListeners: function(es) {
             var i = activeListeners.length,
-                obj = null;
+                obj = null,
+                remainingListeners = [];
             for (;i--;) {
                 obj = activeListeners[i];
-                removeListener(obj.el, obj.type, obj.fn);
+                if (!es || (es && obj.es === es)) {
+                    removeListener(obj.el, obj.type, obj.fn);
+                } else {
+                    remainingListeners.push(obj);
+                }
             }
-            activeListeners = [];
+            console.log(activeListeners.length);
+            activeListeners = remainingListeners;
+            console.log(activeListeners.length);
         },
         
         removeChildNodes: function (el) {
