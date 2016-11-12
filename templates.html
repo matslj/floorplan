@@ -1,0 +1,42 @@
+
+<!-- Templates -->
+<!-- Sections {{# ... }} ... {{/ ... }}. Depending on the value of the key in
+     the current context:
+     * if the key results in a falsy value the content in the section
+       isn't showed. 
+     * if keys is a non empty list the content is repeated. -->
+<script id="tmpl-presentation" type="x-tmpl-mustache">
+    <div class="room-data row">
+        {{#subTitle}}
+        <div class='{{ class }}'>{{#title}}<h4>{{ title }}</h4>{{/title}}<p>{{ subTitle }}</p></div>
+        {{/subTitle}}
+        {{#occupants}}
+        <div class="presentation">
+            <img src="img/personal/{{#pic}}{{ pic }}{{/pic}}{{^pic}}bildsaknas.jpg{{/pic}}" alt="bild av {{ name }}">
+            <div>{{ name }}</div>
+        </div>
+        {{/occupants}}
+    </div>
+</script>
+
+<script id="tmpl-hover" type="x-tmpl-mustache">
+    {{#subTitle}}
+    <span class='{{ class }}'>{{ subTitle }}{{#title}}: {{ title }}{{/title}}</span>
+    {{/subTitle}}
+    {{^subTitle}}
+    <ul>
+    {{#occupants}}
+    <li>{{ name }}</li>
+    {{/occupants}}
+    </ul>
+    {{/subTitle}}
+</script>
+
+<!-- When looping over string arrays . refers to the current item -->
+<script id="tmpl-list-item" type="x-tmpl-mustache">
+    {{#listItems}}
+    <li class="{{ class }}" data-floornr="{{ floor }}" data-roomid="{{ roomId }}">
+        <span class="floor-number">{{ floor }}</span>&nbsp;<em>{{{ title }}}</em>{{#extras}},&nbsp;<i>{{{.}}}</i>{{/extras}}
+    </li>
+    {{/listItems}}
+</script>

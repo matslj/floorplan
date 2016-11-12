@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hitta kollegan</title>
+        <link rel="stylesheet" type="text/css" href="../css/styles.css">
+        <link rel="stylesheet" type="text/css" href="../css/material-icons.css">
+        <script type="text/javascript" src="../js/floor-utils.js"></script>
+        <script type="text/javascript" src="../js/floor-graph.js"></script>
+        <!--<script type="text/javascript" src="../js/floor-graph-panzoom.js"></script>-->
+        <script type="text/javascript" src="../js/floor-admin.js"></script>
+    </head>
+    <body>
+        <div id="wrapper">
+            <header>
+                <div class="content">
+                    <div class="site-header">
+                        <h1>Hitta kollegan</h1>
+                    </div>
+                    <div class="navbar-panel">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                            <a href="../index.html">Hem</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+            <div id="content" class="one-col">
+                <div id="col1" class="col">
+                    <div id="floor-header">
+                        <h1>Våning <span id="floorNumber">3</span></h1>
+                        <div id="floorChooser">
+                            <button id="floor-back" class="btn btn-primary btn-xs" onclick="floor.admin.floorChooserAction(-1);"><i class="material-icons md-18 md-light">arrow_back</i></button>
+                            <button id="floor-forward" class="btn btn-primary btn-xs" onclick="floor.admin.floorChooserAction(1);"><i class="material-icons md-18 md-light md-inactive">arrow_forward</i></button>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div id="hoverLayer"></div>
+                    <div id="level3" class="floorplan">
+                        <object id="floor3" data="../floor3.svg"
+                                type="image/svg+xml">
+                            <p>Tyvärr, din webbläsare stödjer inte SVG.</p>
+                        </object>
+                    </div>
+                    <div id="level2" class="floorplan">
+                        <object id="floor2" data="../floor2.svg"
+                                type="image/svg+xml">
+                            <p>Tyvärr, din webbläsare stödjer inte SVG.</p>
+                        </object>
+                    </div>
+                    <div id="level1" class="floorplan">
+                        <object id="floor1" data="../floor1.svg"
+                                type="image/svg+xml">
+                            <p>Tyvärr, din webbläsare stödjer inte SVG.</p>
+                        </object>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

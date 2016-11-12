@@ -1,0 +1,8 @@
+# This will be ignored in this folder
+nbproject/
+build/
+*.svg
+*.json
+!img/personal/
+img/personal/*
+!img/personal/bildsaknas.jpg

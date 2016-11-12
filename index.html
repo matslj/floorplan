@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="sv">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Hitta kollegan</title>
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <link rel="stylesheet" type="text/css" href="css/material-icons.css">
+    </head>
+    <body>
+        <div id="wrapper">
+            <header>
+                <div class="content">
+                    <div class="site-header">
+                        <h1>Hitta kollegan</h1>
+                    </div>
+                    <div class="navbar-panel">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                            <a href="admin/index.html">Admin</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+            <div id="content" class="two-col">
+                <div id="col1" class="col">
+                    <div id="floor-header">
+                        <h1>Våning <span id="floorNumber">3</span></h1>
+                        <div id="floorChooser">
+                            <button id="floor-back" class="btn btn-primary btn-xs" onclick="floor.app.floorChooserAction(-1);"><i class="material-icons md-18 md-light">arrow_back</i></button>
+                            <button id="floor-forward" class="btn btn-primary btn-xs" onclick="floor.app.floorChooserAction(1);"><i class="material-icons md-18 md-light md-inactive">arrow_forward</i></button>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div id="hoverLayer"></div>
+                    <div id="level3" class="floorplan">
+                        <object id="floor3" data="floor3.svg"
+                                type="image/svg+xml">
+                            <p>Tyvärr, din webbläsare stödjer inte SVG.</p>
+                        </object>
+                    </div>
+                    <div id="level2" class="floorplan">
+                        <object id="floor2" data="floor2.svg"
+                                type="image/svg+xml">
+                            <p>Tyvärr, din webbläsare stödjer inte SVG.</p>
+                        </object>
+                    </div>
+                    <div id="level1" class="floorplan">
+                        <object id="floor1" data="floor1.svg"
+                                type="image/svg+xml">
+                            <p>Tyvärr, din webbläsare stödjer inte SVG.</p>
+                        </object>
+                    </div>
+                    <div id="room-data"></div>
+                </div>
+                <div id="col2" class="col">
+                    <div id="accPanel">
+                        <div id="search">
+                            <button id="search-button" class="btn btn-primary">Filtrera</button>
+                            <span><input type="text" id="search-input" class="form-control" name="search-input" placeholder="ord att filtrera på" /></span>
+                            <div style="margin-top: 8px;" class="btn-group btn-group-justified">
+                                <button class="btn btn-primary btn-sm" id="empty-rooms-btn">Tomma rum</button>
+                                <button class="btn btn-primary btn-sm" id="conference-rooms-btn">Konferensrum</button>
+                            </div>
+                        </div>
+                        <ul id="plist"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <script type="text/javascript" src="js/ext/mustache.min.js"></script>
+        <script type="text/javascript" src="js/floor-constants.js"></script>
+        <script type="text/javascript" src="js/floor-utils.js"></script>
+        <script type="text/javascript" src="js/floor-loader.js"></script>
+        <script type="text/javascript" src="js/floor-datahandler.js"></script>
+        <script type="text/javascript" src="js/floor-graph.js"></script>
+        <script type="text/javascript" src="js/floor-searchpanel.js"></script>
+        <script type="text/javascript" src="js/floor.js"></script>
+    </body>
+</html>
