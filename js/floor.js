@@ -183,8 +183,7 @@ floor.app = (function() {
             floorNumberElement = document.getElementById("floorNumber");
             allFloors = document.querySelectorAll(".floorplan");
             utils.addClass(allFloors[0], constants.CLASS_SHOW_FLOOR);
-//            allFloors[0].style.display = 'block';
-            
+
             // Init templates
 //            tmplPresentation = document.getElementById("tmpl-presentation").innerHTML;
 //            tmplHover = document.getElementById("tmpl-hover").innerHTML;

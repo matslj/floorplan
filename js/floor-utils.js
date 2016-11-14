@@ -114,7 +114,9 @@ floor.utils = (function() {
         },
         
         /**
-         * 
+         * Manages enabling/disabling of the arrows on the change
+         * floor buttons.
+         * @param {number} the new floor number
          */
         manageArrows: function(aFloorNumber) {
             var back = document.querySelector("#floor-back i");
