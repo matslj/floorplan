@@ -13,6 +13,8 @@ var floor = floor || {};
 floor.admin = (function () {
     // Dependencies
     var graph = floor.graph,
+        constants = floor.constants,
+        utils = floor.utils,
         // graphPZ = floor.graphPanZoom,
     
     // Properties
@@ -40,18 +42,6 @@ floor.admin = (function () {
             newEl.innerHTML = el.id;
             hoverLayer.appendChild(newEl);
         }
-    },
-    
-    _manageArrows = function(aFloorNumber) {
-            var back = document.querySelector("#floor-back i");
-            var forward = document.querySelector("#floor-forward i");
-            back.className = back.className.replace(new RegExp('(?:^|\\s)md-inactive(?:\\s|$)'), ' ');
-            forward.className = forward.className.replace(new RegExp('(?:^|\\s)md-inactive(?:\\s|$)'), ' ');
-            if (1 === aFloorNumber) {
-                back.className = back.className + " md-inactive";
-            } else if (3 === aFloorNumber) {
-                forward.className = forward.className + " md-inactive";
-            }
     };
     
     return {
@@ -59,14 +49,7 @@ floor.admin = (function () {
             hoverLayer = document.getElementById("hoverLayer");
             floorNumberElement = document.getElementById("floorNumber");
             allFloors = document.querySelectorAll(".floorplan");
-            allFloors[0].style.display = 'block';
-            
-            // Retrieve bounding rects for the appropriate elements in the dom structure.
-            // We only need the displaced elements.
-//            bodyBR = document.body.getBoundingClientRect(); // Needed to compensate for hover displacement
-//            col1BR = document.getElementById("col1").getBoundingClientRect(); // Needed to compensate for hover displacement
-//            
-            // graph.init(currentFloorNumber);
+            utils.addClass(allFloors[0], constants.CLASS_ADMIN_SHOW_FLOOR);
             // The line below activates the pan-and-zoom tool
             // graphPZ.init(graph.getSvgDoc(), this.markSelectableRooms);
             this.markSelectableRooms(currentFloorNumber);
@@ -91,7 +74,6 @@ floor.admin = (function () {
                     graph.processElementsInRange("g2610", "g2618", _displayHoverBox);
                     break;
                 case 1:
-                    
                     graph.processElementsInRange("g3048", "g3084", _displayHoverBox);
                     graph.processElementsInRange("g3116", "g3120", _displayHoverBox);
                     graph.processElementsInRange("g2916", "g2984", _displayHoverBox);
@@ -111,12 +93,12 @@ floor.admin = (function () {
             currentFloorNumber = floorNumber;
             hoverLayer.innerHTML = '';
             for(i = allFloors.length; i--;) {
-                allFloors[i].style.display = 'none';
+                utils.removeClass(allFloors[i], constants.CLASS_ADMIN_SHOW_FLOOR);
             }
             var currentLevel = document.getElementById("level" + currentFloorNumber);
-            currentLevel.style.display = "block";
+            utils.addClass(currentLevel, constants.CLASS_ADMIN_SHOW_FLOOR);
             floorNumberElement.innerHTML = currentFloorNumber;
-            _manageArrows(currentFloorNumber);
+            utils.manageArrows(currentFloorNumber);
             floor.admin.markSelectableRooms(currentFloorNumber);
         }
         

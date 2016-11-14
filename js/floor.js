@@ -151,18 +151,6 @@ floor.app = (function() {
         hoverLayer.innerHTML = "";
     },
     
-    _manageArrows = function(aFloorNumber) {
-            var back = document.querySelector("#floor-back i");
-            var forward = document.querySelector("#floor-forward i");
-            back.className = back.className.replace(new RegExp('(?:^|\\s)md-inactive(?:\\s|$)'), ' ');
-            forward.className = forward.className.replace(new RegExp('(?:^|\\s)md-inactive(?:\\s|$)'), ' ');
-            if (1 === aFloorNumber) {
-                back.className = back.className + " md-inactive";
-            } else if (3 === aFloorNumber) {
-                forward.className = forward.className + " md-inactive";
-            }
-    },
-    
     _displayHoverPopup = function(el) {
         var bb = null,
             newEl = null,
@@ -194,7 +182,8 @@ floor.app = (function() {
             hoverLayer = document.getElementById("hoverLayer");
             floorNumberElement = document.getElementById("floorNumber");
             allFloors = document.querySelectorAll(".floorplan");
-            allFloors[0].style.display = 'block';
+            utils.addClass(allFloors[0], constants.CLASS_SHOW_FLOOR);
+//            allFloors[0].style.display = 'block';
             
             // Init templates
 //            tmplPresentation = document.getElementById("tmpl-presentation").innerHTML;
@@ -266,15 +255,15 @@ floor.app = (function() {
         },
         
         changeFloor: function(floorNumber) {
-            floor.app.clearMultiSelect()
+            floor.app.clearMultiSelect();
             currentFloorNumber = floorNumber;
             for(i = allFloors.length; i--;) {
-                allFloors[i].style.display = 'none';
+                utils.removeClass(allFloors[i], constants.CLASS_SHOW_FLOOR);
             }
             var currentLevel = document.getElementById("level" + currentFloorNumber);
-            currentLevel.style.display = "block";
+            utils.addClass(currentLevel, constants.CLASS_SHOW_FLOOR);
             floorNumberElement.innerHTML = currentFloorNumber;
-            _manageArrows(currentFloorNumber);
+            utils.manageArrows(currentFloorNumber);
             floor.app.reload();
         }
     };

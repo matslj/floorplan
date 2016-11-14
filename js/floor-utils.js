@@ -103,6 +103,30 @@ floor.utils = (function() {
                 return m.apply(o, [].slice.call(arguments));
             };
         },
+        
+        addClass: function(element, theClassName) {
+            element.className += (" " + theClassName);
+        },
+        
+        removeClass: function(element, theClassName) {
+            var regex = new RegExp('(?:^|\\s)' + theClassName + '(?:\\s|$)');
+            element.className = element.className.replace(regex, ' ');
+        },
+        
+        /**
+         * 
+         */
+        manageArrows: function(aFloorNumber) {
+            var back = document.querySelector("#floor-back i");
+            var forward = document.querySelector("#floor-forward i");
+            this.removeClass(back, "md-inactive");
+            this.removeClass(forward, "md-inactive");
+            if (1 === aFloorNumber) {
+                this.addClass(back, "md-inactive");
+            } else if (3 === aFloorNumber) {
+                this.addClass(forward, "md-inactive");
+            }
+        },
 
         /**
          * Searches through the chosen string fields of the objects in an array for a match

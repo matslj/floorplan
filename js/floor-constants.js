@@ -12,6 +12,9 @@ var floor = floor || {};
 floor.constants = {
     clickColor: "green",
     CONFERENCE : "konferens",
-    OFFICE : "kontor"
+    OFFICE : "kontor",
+    
+    CLASS_SHOW_FLOOR: "showFloor",
+    CLASS_ADMIN_SHOW_FLOOR: "showFloorAdmin"
 };
 
