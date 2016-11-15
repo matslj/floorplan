@@ -672,9 +672,36 @@ input:focus {
   box-shadow: none;
 }
 
-
-
 button::-moz-focus-inner {
   border: 0;
 }
 
+/* Media queries for the responsive web */
+
+@media screen and (min-width: 1700px) {
+	#accPanel button {
+        font-size: 2em;
+		padding: 10px;
+    }
+	
+	#accPanel input[type="text"] {
+		font-size: 2.3em;
+	}
+	
+    #accPanel ul {
+        font-size: 2em;
+    }
+	
+	#accPanel ul li {
+        padding-top: 10px;
+		padding-bottom: 10px;
+    }
+	
+	.hoverBox, .presentation {
+		font-size: 1.4em;
+	}
+	
+	.presentation img, .room-data .emptyRoom, .room-data .conference {
+		height: 160px;
+	}
+}
