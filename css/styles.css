@@ -41,6 +41,8 @@ body {
 h1 {
     font-family: monospace, "Lucida Grande", sans-serif;
     font-size: 2.2em;
+	
+	font-weight: bold;
 }
 
 h4 {
@@ -121,6 +123,7 @@ header .navbar-panel li a {
 }
 
 header h1 {
+	font-weight: normal;
     margin: 0;
     font-size: 2.2em;
 }
@@ -691,7 +694,7 @@ button::-moz-focus-inner {
 	
     #accPanel .form-control {
         font-size: 2em;
-        line-height: 1.8em;
+        line-height: 1.5em;
         height: 2.45em;
     }
 	
@@ -728,26 +731,3 @@ button::-moz-focus-inner {
         left: 40px;
     }
 }
-
-
-/*
-Try increasing your line height property. That would be restricting the viewable area for the letters causing them to be cut off. Firefox's rendering engine renders line height slightly different.
-shareimprove this answer
-	
-answered Mar 28 '12 at 1:40
-KodeKreachor
-6,23393257
-	
-   	 
-	
-Thanks, but that was the first thing I tried. Nothing happens, except the input grows in size. Text is still cut off. – element119 Mar 28 '12 at 1:42
-   	 
-	
-You will also need to adjust the height and padding. Try this: font-size:1.5em; padding: 0.43em 0.4em; line-height:1.25em; height: 1.25em; – skottt Mar 28 '12 at 2:07
-   	 
-	
-Ok, but how does that make any sense? Shouldn't the height and line-height be equal, if not larger, than the font-size? – element119 Mar 28 '12 at 2:23
-2 	 
-	
-em in font-size is influenced by the parent's / container's value, whereas em in line-height is calculated based on the element's font-size. Sample: jsfiddle.net/sikusikucom/ryd6p – moey Mar 29 '12 at 4:54 
-*/
