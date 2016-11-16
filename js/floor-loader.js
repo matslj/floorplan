@@ -25,6 +25,13 @@ floor.loader = (function() {
                 };
             }(xhr));
             xhr.open('GET', url, true);
+			// Start - disable caching
+			xhr.setRequestHeader("Pragma", "no-cache");
+			xhr.setRequestHeader("Cache-Control", "no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
+			xhr.setRequestHeader("Expires", 0);
+			xhr.setRequestHeader("Last-Modified", new Date(0));
+			xhr.setRequestHeader("If-Modified-Since", new Date(0));
+			// End - disable caching
             xhr.send('');
         },
         
