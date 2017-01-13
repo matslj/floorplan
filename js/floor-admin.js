@@ -15,6 +15,7 @@ floor.admin = (function () {
     var graph = floor.graph,
         constants = floor.constants,
         utils = floor.utils,
+		loader = floor.loader,
         // graphPZ = floor.graphPanZoom,
     
     // Properties
@@ -26,6 +27,16 @@ floor.admin = (function () {
     allFloors = null,
     
     // Methods
+	markProcessedRooms = function(floorNumber) {
+        var tempEl = null,
+            i = 0;
+        for (i = loader.data.rooms.length; i--;) {
+            if (floorNumber === loader.data.rooms[i].floor) {
+                tempEl = graph.fillProcessed(loader.data.rooms[i].id);
+            }
+        }
+    },
+	
     _displayHoverBox = function(el) {
         var bb = null,
             newEl = null,
@@ -53,6 +64,7 @@ floor.admin = (function () {
             // The line below activates the pan-and-zoom tool
             // graphPZ.init(graph.getSvgDoc(), this.markSelectableRooms);
             this.markSelectableRooms(currentFloorNumber);
+			markProcessedRooms(currentFloorNumber);
         },
         
         markSelectableRooms: function(floorNumber) {
@@ -100,6 +112,7 @@ floor.admin = (function () {
             floorNumberElement.innerHTML = currentFloorNumber;
             utils.manageArrows(currentFloorNumber);
             floor.admin.markSelectableRooms(currentFloorNumber);
+			markProcessedRooms(currentFloorNumber);
         }
         
     };
@@ -110,6 +123,19 @@ floor.admin = (function () {
  ***************************/
 (function () {
     window.onload = function () {
-        floor.admin.init();
+        // floor.admin.init(); // Old way
+		
+		// Resources that should be loaded prior to application start
+        var resources = [
+            {
+                path: "../data.json",
+                dataTarget: floor.loader.setData
+            },
+            {
+                path: "../templates.html",
+                dataTarget: floor.loader.setTemplates
+            }
+        ];
+        floor.loader.init(resources, floor.admin.init, floor.admin);
     };
 }());

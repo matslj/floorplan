@@ -16,6 +16,7 @@ floor.graph = (function() {
         svgns = null,
         
         FILL_HOVER = "fill-hover",
+		FILL_PROCESSED = "fill-processed",
         FILL_SELECTED = "fill-selected",
         FILL_NONE = "fill-none";
     
@@ -113,6 +114,11 @@ floor.graph = (function() {
     //        this.clearHover();
     //    },
 
+		fillProcessed: function(svgElementId) {
+			var tempEl = svgDoc.getElementById(svgElementId);
+            tempEl.setAttribute("class", FILL_PROCESSED);
+        },
+	
         fillHoverBG: function(svgElement) {
             svgElement.setAttribute("class", FILL_HOVER);
         },
