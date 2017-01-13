@@ -732,7 +732,9 @@ button::-moz-focus-inner {
     }
 }
 
-/* Flexboxing */
+/* Flexboxing of the userlist will, combined with overflow-y on the list,
+   will make the list as big as the window allows and apply a scroll to the list
+   if it doesn't fit the window. All changes regarding this in the css is located below. */
 html, body, #wrapper, #content, #col2, #accPanel {
     height: 100%;
 }
@@ -747,14 +749,24 @@ html, body, #wrapper, #content, #col2, #accPanel {
 }
 
 #accPanel {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
   flex-direction: column;
   margin: 0 0 0 2em;
   padding-top: 5em;
+  padding-bottom: 4em !important;
+}
+
+#search {
+	flex-shrink: 0;
 }
 
 #plist {
   flex-grow: 1;
-  padding-bottom: 2em;
   overflow-y: auto;
 }
+
+/* End of flexbox changes to userlist */
