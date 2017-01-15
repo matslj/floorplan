@@ -15,6 +15,8 @@ floor.constants = {
     OFFICE : "kontor",
     
     CLASS_SHOW_FLOOR: "showFloor",
-    CLASS_ADMIN_SHOW_FLOOR: "showFloorAdmin"
+    CLASS_ADMIN_SHOW_FLOOR: "showFloorAdmin",
+    
+    UNDEFINED: "undefined"
 };
 

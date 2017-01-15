@@ -8,7 +8,7 @@
 <script id="tmpl-presentation" type="x-tmpl-mustache">
     <div class="room-data row">
         {{#subTitle}}
-        <div class='{{ class }}'>{{#title}}<h4>{{ title }}</h4>{{/title}}<p>{{ subTitle }}</p></div>
+        <div class='{{ cls }}'>{{#title}}<h4>{{ title }}</h4>{{/title}}<p>{{ subTitle }}</p></div>
         {{/subTitle}}
         {{#occupants}}
         <div class="presentation">
@@ -21,7 +21,7 @@
 
 <script id="tmpl-hover" type="x-tmpl-mustache">
     {{#subTitle}}
-    <span class='{{ class }}'>{{ subTitle }}{{#title}}: {{ title }}{{/title}}</span>
+    <span class='{{ cls }}'>{{ subTitle }}{{#title}}: {{ title }}{{/title}}</span>
     {{/subTitle}}
     {{^subTitle}}
     <ul>
@@ -35,7 +35,7 @@
 <!-- When looping over string arrays . refers to the current item -->
 <script id="tmpl-list-item" type="x-tmpl-mustache">
     {{#listItems}}
-    <li class="{{ class }}" data-floornr="{{ floor }}" data-roomid="{{ roomId }}">
+    <li class="{{ cls }}" data-floornr="{{ floor }}" data-roomid="{{ roomId }}">
         <span class="floor-number">{{ floor }}</span>&nbsp;<em>{{{ title }}}</em>{{#extras}},&nbsp;<i>{{{.}}}</i>{{/extras}}
     </li>
     {{/listItems}}

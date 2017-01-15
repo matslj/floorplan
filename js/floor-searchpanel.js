@@ -56,12 +56,12 @@ floor.searchPanel = (function() {
             view.extras = [];
             if (item.type === constants.CONFERENCE) {
                 view.extras.push("konferensrum");
-                view.class = "conference";
+                view.cls = "conference";
             } else if (typeof item.name !== "undefined") {
                 view.extras.push(item.prof);
-                view.class = "office";
+                view.cls = "office";
             } else if (typeof item.name === "undefined") {
-                view.class = "empty";
+                view.cls = "empty";
             }
             return view;
         },

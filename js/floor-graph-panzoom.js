@@ -4,8 +4,8 @@
 
 var floor = floor || {};
 /**
- * This module is for interacting with the svg document. All svg interaction
- * should go through this module.
+ * This module adds pan and zoom to the svg graphics. It works but should be
+ * considered as experimental at this point. It is not included in the base delivery.
  * 
  * @type Object
  */

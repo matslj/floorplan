@@ -71,6 +71,11 @@ h4 {
     display: block;
 }
 
+#floorLoader {
+    padding-top: 20em;
+    padding-left: 10em;
+}
+
 @keyframes example {
     from {opacity: 0;}
     to {opacity: 1;}
@@ -268,11 +273,12 @@ object {
 
 /* --- The hoverbox --- */
 
-.hoverBox {
+.hoverBox, .hoverBoxAdmin {
     position: absolute;
     border: 1px solid black;
     padding: 10px;
-    background-color: whitesmoke;
+    background-color: #f5f5f5; /* whitesmoke */
+    z-index: 1999;
     
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
@@ -290,18 +296,7 @@ object {
 }
 
 .hoverBoxAdmin {
-    position: absolute;
-    border: 1px solid black;
     padding: 4px;
-    background-color: whitesmoke;
-    
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    
-    -webkit-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    -moz-box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
-    box-shadow: 5px 5px 5px 0px rgba(0,0,0,0.75);
 }
 
 .hoverBoxAdmin:hover {

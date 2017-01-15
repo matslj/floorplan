@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Komp" default="build.dev">
+    
+    <tstamp>
+        <format property="build.time" pattern="yyyy-MM-dd hh:mm:ss" locale="se,SV"/>
+    </tstamp>
+
+    <!-- set global properties for this build -->
+    <loadproperties srcfile="ant.properties" />
+
+    <!-- Create the build directory -->
+    <target name="init">
+        <!-- Create the build directory structure used by compile -->
+        <mkdir dir="${build.dir}"/>
+    </target>
+
+    <!-- Clean the build directory -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <!-- Concatenate all js-files from the source directory into a single js-file 
+         The '!' sign at the (almost) start of the <header> content, tells the
+         yui compressor that the line is important and shall not be removed. -->
+    <target name="concatenate">
+        <concat destfile="${build.dir}/floors.js" fixlastline="yes">
+            <header>/*! Build time: ${build.time} */</header>
+            <filelist dir="${src.dir}" files="floor-constants.js" />
+            <filelist dir="${src.dir}" files="floor-utils.js" />
+            <filelist dir="${src.dir}" files="floor-loader.js" />
+            <filelist dir="${src.dir}" files="floor-datahandler.js" />
+            <filelist dir="${src.dir}" files="floor-graph.js" />
+            <filelist dir="${src.dir}" files="floor-searchpanel.js" />
+            <filelist dir="${src.dir}" files="floor.js" />
+        </concat>
+    </target>
+
+    <!-- Minify the js-files in the build directory -->
+    <target name="minify">
+        <apply executable="java" failonerror="true" parallel="false" dest="${build.dir}">
+            <fileset dir="${build.dir}" includes="*.js" />
+            <mapper type="glob" from="*.js" to="*-min.js" />
+
+            <arg line="-jar"/>
+            <arg path="${yuicompressor}"/>
+            <arg line="${yuicompressor.options}"/>
+            <srcfile/>
+
+            <arg line="-o"/>
+            <targetfile/>
+        </apply>
+    </target>
+    
+    <target name="concatenateWithExt">
+        <concat destfile="${build.dir}/floors-min.js" fixlastline="yes">
+            <header>/*! Build time: ${build.time} */</header>
+            <filelist dir="${src.dir}/ext" files="mustache.min.js" />
+            <filelist dir="${build.dir}" files="floors-pre-min.js" />
+        </concat>
+    </target>
+    
+    <!-- Move all minified js-files to the src directory -->
+    <target name="replaceOldMin">
+        <move todir="${src.dir}">
+            <filelist dir="${build.dir}" files="floors-min.js" />
+        </move>
+    </target>
+
+    <target name="build.dev" depends="clean,init,concatenate,minify,replaceOldMin">
+        <echo>Build-dev completed</echo>
+    </target>
+</project>

@@ -10,6 +10,7 @@ floor.utils = (function() {
         removeListener = null,
         activeListeners = [];
         
+    // 'Class' initialization of x-browser listener handling
     if (typeof window.addEventListener === 'function') {
         addListener = function(el, type, fn) {
             el.addEventListener(type, fn, false);
@@ -77,9 +78,7 @@ floor.utils = (function() {
                     remainingListeners.push(obj);
                 }
             }
-            console.log(activeListeners.length);
             activeListeners = remainingListeners;
-            console.log(activeListeners.length);
         },
         
         removeChildNodes: function (el) {

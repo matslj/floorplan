@@ -118,7 +118,7 @@ floor.app = (function() {
         view.title = room.name;
         if (room.type === constants.CONFERENCE) {
             view.subTitle = "Konferensrum";
-            view.class = "conference";
+            view.cls = "conference";
         } else if (typeof room.occupants !== "undefined") {
             view.occupants = [];
             for (i = 0, length = room.occupants.length; i < length; i++) {
@@ -130,7 +130,7 @@ floor.app = (function() {
         } else {
             // empty room
             view.subTitle = "Tomt!";
-            view.class = "emptyRoom";
+            view.cls = "emptyRoom";
         }
         return Mustache.render(template, view);
     },
@@ -181,6 +181,7 @@ floor.app = (function() {
             roomDataElement = document.getElementById("room-data");
             hoverLayer = document.getElementById("hoverLayer");
             floorNumberElement = document.getElementById("floorNumber");
+            document.getElementById("floorLoader").style.cssText = "display: none;";
             allFloors = document.querySelectorAll(".floorplan");
             utils.addClass(allFloors[0], constants.CLASS_SHOW_FLOOR);
 

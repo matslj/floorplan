@@ -44,11 +44,11 @@ floor.dataHandler = (function() {
 
             // Sort the rooms by occupants name
             this.occupants.sort(function (a, b) {
-                if (typeof a.name === "undefined" && typeof b.name !== "undefined")
+                if (typeof a.name === constants.UNDEFINED && typeof b.name !== constants.UNDEFINED)
                     return -1;
-                if (typeof a.name !== "undefined" && typeof b.name === "undefined")
+                if (typeof a.name !== constants.UNDEFINED && typeof b.name === constants.UNDEFINED)
                     return 1;
-                if (typeof a.name === "undefined" && typeof b.name === "undefined")
+                if (typeof a.name === constants.UNDEFINED && typeof b.name === constants.UNDEFINED)
                     return 0;
                 if (a.name < b.name)
                     return -1;
@@ -75,7 +75,7 @@ floor.dataHandler = (function() {
 
             for (; i < length; i++) {
                 if (loader.data.rooms[i].type === constants.OFFICE && 
-                        typeof loader.data.rooms[i].occupants === "undefined") {
+                        typeof loader.data.rooms[i].occupants === constants.UNDEFINED) {
                     callback(loader.data.rooms[i]);
                 }
             }

@@ -16,7 +16,7 @@ floor.graph = (function() {
         svgns = null,
         
         FILL_HOVER = "fill-hover",
-		FILL_PROCESSED = "fill-processed",
+	FILL_PROCESSED = "fill-processed",
         FILL_SELECTED = "fill-selected",
         FILL_NONE = "fill-none";
     

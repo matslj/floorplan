@@ -15,6 +15,15 @@ floor.loader = (function() {
         appInitMethod = null,
         appObject =  null,
         
+        /**
+         * Performing an ajax request and executing a callback upon successful
+         * completion of the request.
+         * <p>
+         * Not adapted for older ways of performing ajax requests.
+         * 
+         * @param {String} url the url the resource ajaxed resource
+         * @param {function} callback the callback to be executed on successful completion of request
+         */
         request = function(url, callback) {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = (function (myxhr) {
@@ -25,13 +34,13 @@ floor.loader = (function() {
                 };
             }(xhr));
             xhr.open('GET', url, true);
-			// Start - disable caching
-			xhr.setRequestHeader("Pragma", "no-cache");
-			xhr.setRequestHeader("Cache-Control", "no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
-			xhr.setRequestHeader("Expires", 0);
-			xhr.setRequestHeader("Last-Modified", new Date(0));
-			xhr.setRequestHeader("If-Modified-Since", new Date(0));
-			// End - disable caching
+            // Start - disable caching
+            xhr.setRequestHeader("Pragma", "no-cache");
+            xhr.setRequestHeader("Cache-Control", "no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
+            xhr.setRequestHeader("Expires", 0);
+            xhr.setRequestHeader("Last-Modified", new Date(0));
+            xhr.setRequestHeader("If-Modified-Since", new Date(0));
+            // End - disable caching
             xhr.send('');
         },
         
@@ -71,7 +80,7 @@ floor.loader = (function() {
                 }
                 obj.dataTarget(result);
                 if (resources.length === 0) {
-                    console.log("Starting app");
+                    console.log("All resources loaded - starting application");
                     appInitMethod.call(appObject);
                 } else {
                     loadResource();
@@ -98,7 +107,11 @@ floor.loader = (function() {
         },
         
         /**
-         * Parses the inputstring after script-tags, retrieves each tags id
+         * Takes the content of a template file (a string) and splits the content into
+         * separate templates and stores these templates in an associative array. This
+         * array will later on be used by the mustache template creator.
+         * <p>
+         * Course of action: Parses inputstring for script-tags, retrieves each tags id
          * and use this id as a key in order to store the script content in the
          * templates-object.
          * 
@@ -110,19 +123,37 @@ floor.loader = (function() {
                 scripts = null,
                 i = 0;
 
+            // Create an intermediate DOM container and set its content to the 
+            // template input string. In this case the DOM container is a div
+            // but the type of element does not matter.
             intermediateContainer.innerHTML = theTemplatesAsOneString;
 
+            // Transfer content to fragment
             while (intermediateContainer.childNodes.length > 0) {
                 fragment.appendChild(intermediateContainer.childNodes[0]);
             }
             
+            // Query fragment for all script-elements
             scripts = fragment.querySelectorAll('script');
             
+            // Store the script elements, with all its content, in an associative
+            // array where the template id is key.
             for (i = 0; i < scripts.length; i++) {
                 floor.loader.templates[scripts[i].id] = scripts[i].innerHTML;
             }
         },
 
+        /**
+         * Initializationmethod for the loader. If any resources needs to get loaded
+         * before the rest of the application, this method has to be called.
+         * 
+         * @param {type} aResourceArray an array of resources to be loaded. for 
+         *                              format see loadResource above.
+         * @param {type} anAppInitMehod the method to call when initialization is complete
+         * @param {type} anAppObject a reference to the object which contains the init-method
+         *                           in the previous parameter. This in order to preserve
+         *                           'this' for that object.
+         */
         init: function(aResourceArray, anAppInitMehod, anAppObject) {
             appInitMethod = anAppInitMehod;
             appObject = anAppObject;
