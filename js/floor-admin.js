@@ -79,16 +79,19 @@ floor.admin = (function () {
                 case 3:
                     graph.processElementsInRange("g4452", "g4616", _displayHoverBox);
                     graph.processElementsInRange("g4640", "g4660", _displayHoverBox);
+					graph.processSubElements("extraRooms", _displayHoverBox);
                     break;
                 case 2:
                     graph.processElementsInRange("g2634", "g2722", _displayHoverBox);
                     graph.processElementsInRange("g2754", "g2842", _displayHoverBox);
                     graph.processElementsInRange("g2610", "g2618", _displayHoverBox);
+					graph.processSubElements("extraRooms", _displayHoverBox);
                     break;
                 case 1:
                     graph.processElementsInRange("g3048", "g3084", _displayHoverBox);
                     graph.processElementsInRange("g3116", "g3120", _displayHoverBox);
                     graph.processElementsInRange("g2916", "g2984", _displayHoverBox);
+					graph.processSubElements("extraRooms", _displayHoverBox);
                     break;
                 default:
             }

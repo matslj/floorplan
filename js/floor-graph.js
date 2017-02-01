@@ -62,6 +62,19 @@ floor.graph = (function() {
                 currentEl = currentEl.id === toGId ? null : currentEl.nextSibling;
             }
         },
+		
+		processSubElements: function(parentGid, callback) {
+			var currentEl = svgDoc.getElementById(parentGid),
+                children = Array.prototype.slice.call(currentEl.childNodes),
+				i = 0,
+				child = null;
+            for (;i < children.length; i++) {
+                child = children[i];
+                child.setAttribute("class", FILL_HOVER);
+                child.style.cssText = child.style.cssText.replace(/fill.?:.?none;/, "");
+                callback(child);
+            }
+		},
         
         getSvgDoc: function() {
             return svgDoc;

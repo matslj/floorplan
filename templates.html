@@ -36,7 +36,7 @@
 <script id="tmpl-list-item" type="x-tmpl-mustache">
     {{#listItems}}
     <li class="{{ cls }}" data-floornr="{{ floor }}" data-roomid="{{ roomId }}">
-        <span class="floor-number">{{ floor }}</span>&nbsp;<em>{{{ title }}}</em>{{#extras}},&nbsp;<i>{{{.}}}</i>{{/extras}}
+        <span class="floor-number">{{{ floor }}}</span>&nbsp;<em>{{{ title }}}</em>{{#extras}},&nbsp;<i>{{{.}}}</i>{{/extras}}
     </li>
     {{/listItems}}
 </script>

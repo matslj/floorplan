@@ -130,15 +130,15 @@ floor.utils = (function() {
         },
 
         /**
-         * Searches through the chosen string fields of the objects in an array for a match
-         * of searchString. Only the first level strings are searched (so not strings
+         * Searches through the chosen string (or number) fields of the objects in an array for a match
+         * of searchString. Only the first level strings (or numbers) are searched (so not strings
          * in subobjects). Matching string sequences in the result are em-marked.
          * 
          * @param {type} objArray the array of objects to be searched through
          * @param {type} searchString the search string
          * @param {Array} searchableFields the names of the string field properties that
          *               will be searched. If for example this array contains the values
-         *               name and prof, only the strings of those properties will be searched.
+         *               name and prof, only the strings and numbers of those properties will be searched.
          * @returns {Array|floor.utils.searchTextFieldsInObject.returnArray} the result of the search
          */
         searchTextFieldsInObject: function (objArray, searchString, searchableFields) {
@@ -151,7 +151,8 @@ floor.utils = (function() {
                 tempStr = null,
                 tempObj = null,
                 matchFound = false,
-                returnArray = [];
+                returnArray = []
+				iRef = null;
 
             for (; i < length; i++) {
                 obj = objArray[i];
@@ -159,13 +160,18 @@ floor.utils = (function() {
                 matchFound = false;
                 for (key in obj) {
                     if (obj.hasOwnProperty(key)) {
+						iRef = obj[key];
                         if (searchableFields.indexOf(key) >= 0) {
-                            if (typeof obj[key] === "string") {
-                                index = obj[key].toLowerCase().indexOf(searchString);
+							if (typeof iRef === "number") {
+								// Convert to string
+								iRef = "" + iRef;
+							}
+                            if (typeof iRef === "string") {
+                                index = iRef.toLowerCase().indexOf(searchString);
                                 if (index >= 0) {
-                                    tempStr = obj[key].substring(0, index);
-                                    tempStr += "<em class='match'>" + obj[key].substring(index, index + searchStrLength) + "</em>";
-                                    tempStr += obj[key].substr(index + searchStrLength);
+                                    tempStr = iRef.substring(0, index);
+                                    tempStr += "<em class='match'>" + iRef.substring(index, index + searchStrLength) + "</em>";
+                                    tempStr += iRef.substr(index + searchStrLength);
                                     tempObj[key] = tempStr;
                                     matchFound = true;
                                     continue;
@@ -174,7 +180,7 @@ floor.utils = (function() {
                                 throw new Error("Only string properties should be searchable");
                             }
                         }
-                        tempObj[key] = obj[key];
+                        tempObj[key] = iRef;
                     }
                 }
                 if (matchFound) {

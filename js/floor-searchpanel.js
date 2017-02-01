@@ -29,7 +29,7 @@ floor.searchPanel = (function() {
         EMPTY_ROOMS_BTN = "empty-rooms-btn",
         CONFERENCE_ROOMS_BTN = "conference-rooms-btn",
         SEARCH_BUTTON = "search-button",
-        SEARCH_FIELDS = ["name", "prof"],
+        SEARCH_FIELDS = ["floor", "name", "prof"],
         
         // Private properties
         pList = null,
@@ -86,6 +86,8 @@ floor.searchPanel = (function() {
             
             app.clearMultiSelect();
             if (evel.id && ((evel.id === EMPTY_ROOMS_BTN) || (evel.id === CONFERENCE_ROOMS_BTN))) {
+				// Clear input field
+                inputField.value = "";
                 // Handle click on empty room btn or conf room button
                 pList.innerHTML = "";
                 app.deselectRoom();
@@ -110,33 +112,40 @@ floor.searchPanel = (function() {
             return false;
         },
         
+		/**
+		 * Handles events for the UL-list (the room search resultlist). Observe that the
+		 * UL-list element is assumed to be bound to clickevents with this function as callback.
+		 */
         eventHandlerList = function(evt) {
             var evel = evt.target,
                 roomId = null,
                 svgTarget = null,
                 floorNumber = 3;
-        
-            app.clearMultiSelect();
-            if (evel.nodeName !== "LI") {
-                evel = evel.parentNode;
-            }
-            floorNumber = parseInt(evel.getAttribute("data-floornr"),10);
-            if (app.getCurrentFloorNumber() !== floorNumber) {
-                app.changeFloor(floorNumber);
-            }            
-            roomId = evel.getAttribute("data-roomid");
-            svgTarget = graph.getSvgElementById(roomId);
-                    
-            if (evel.nodeName === "LI") {
-                app.selectRoomAction(svgTarget);
-            }
-            evt.stopPropagation();
-            return false;
+			
+			// Ignore clicks on the UL element itself. Only LI and subelements of LI are valid clickables.
+			if (evel.nodeName !== "UL") {
+				app.clearMultiSelect();
+				while(evel.nodeName !== "LI") {
+					evel = evel.parentNode;
+				}
+				floorNumber = parseInt(evel.getAttribute("data-floornr"),10);
+				if (app.getCurrentFloorNumber() !== floorNumber) {
+					app.changeFloor(floorNumber);
+				}            
+				roomId = evel.getAttribute("data-roomid");
+				svgTarget = graph.getSvgElementById(roomId);
+						
+				if (evel.nodeName === "LI") {
+					app.selectRoomAction(svgTarget);
+				}
+				evt.stopPropagation();
+				return false;
+			}
         };
     
-    // Public interface
     return {
-        
+        // Public interface
+		
         init: function() {
             var data = dataHandler.occupants;
             

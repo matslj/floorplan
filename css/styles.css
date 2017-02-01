@@ -142,7 +142,8 @@ header h1 {
     clear: both;
 }
 
-/* --- Row handling --- */
+/* --- Start - Row handling --- */
+/*
 div.row {
     display: table;
     table-layout: fixed;
@@ -156,6 +157,18 @@ div.row div {
 div.row div div {
     display: block;
 }
+*/
+
+div.row div {
+    float: left;
+	margin: 15px 15px 0 0;
+}
+
+div.row div div {
+    float: none;
+	margin: 0;
+}
+/* --- End - Row handling --- */
 
 /* --- SVG presentation --- */
 object {
@@ -332,6 +345,7 @@ object {
     outline: 0 none;
     
     padding: 5px;
+	/* padding: 0 5px; */
     background-color: white;
     position: relative;
     
@@ -353,19 +367,28 @@ object {
 }
 
 .room-data .emptyRoom, .room-data .conference {
-    width: 100px;
+    min-width: 100px;
     font-size: 1.8em;
     font-weight: bold;
 }
 
 .room-data h4 {
-    margin: 0.2em 0 1.6em 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+    margin: 0.2em 0 0 5px;
+	padding: 0;
 }
 
-.room-data .emptyRoom p {
-    position: relative;
-    top: 34px;
-    left: 12px;
+.room-data .emptyRoom p, .room-data .conference p {
+	position: relative;
+	top: -5px; /* Compensates for the padding on emptyRoom class. */
+	left: 0px;
+	height: inherit;
+	min-width: inherit;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
 }
 
 /* Other stuff */
@@ -694,12 +717,12 @@ button::-moz-focus-inner {
     }
 	
     #accPanel ul {
-        font-size: 2em;
+        font-size: 1.4em;
     }
 	
     #accPanel ul li {
         padding-top: 10px;
-	padding-bottom: 10px;
+	    padding-bottom: 10px;
     }
 	
     .hoverBox, .presentation {
@@ -712,23 +735,18 @@ button::-moz-focus-inner {
     }
     
     .room-data h4 {
-        margin: 0.3em 0 3.5em 0;
+        margin: 0.3em 0 0 5px;
     }
     
     .room-data .emptyRoom, .room-data .conference {
-        width: 160px;
+        min-width: 160px;
         font-size: 1.8em;
         font-weight: bold;
-    }
-
-    .room-data .emptyRoom p {
-        top: 60px;
-        left: 40px;
     }
 }
 
 /* Flexboxing of the userlist will, combined with overflow-y on the list,
-   will make the list as big as the window allows and apply a scroll to the list
+   make the list as big as the window allows and apply a scroll to the list
    if it doesn't fit the window. All changes regarding this in the css is located below. */
 html, body, #wrapper, #content, #col2, #accPanel {
     height: 100%;
